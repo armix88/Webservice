@@ -64,6 +64,26 @@
 			else
 				$recipient = NULL;
 			
+			if (array_key_exists ('photo', $parameters ))
+				$photo = $parameters ['photo'];
+			else
+				$photo = NULL;
+			
+			if (array_key_exists ('datas', $parameters ))
+				$datas = $parameters ['datas'];
+			else
+				$datas = NULL;
+			
+			if (array_key_exists ('photo_name', $parameters ))
+				$photo_name = $parameters ['photo_name'];
+			else
+				$photo_name = "";
+			
+			if (array_key_exists ('description', $parameters ))
+				$description = $parameters ['description'];
+			else
+				$description = "";
+			
 			switch($tag){
 				case"login":
 					if(isset($username) AND issset($password))
@@ -100,6 +120,11 @@
 					sendPicture($username, 1, $recipient,"<HTML>Questa invece la sta inviando il <b>WebService</b><br />Best Regards<br />" . $username . "</HTML>");
 					$message = SUCCESS;
 					break;
+				case "savedatas":
+					$photo_name = "";
+					$description = ""
+					$message = saveDatas($username, $photo, $datas , $photo_name, $description);
+					break:
 				default:
 					throw new Exception('No valid tag value');
 			}			

@@ -223,4 +223,11 @@
 		sendEmail($parameters);
 		unlink($filename);
 	}
+	
+	function saveDatas($username, $photo, $datas , $photo_name, $description)
+	{
+		$imgData = base64_encode($photo);
+		$strMessage = "<img src= 'data:image/jpeg;base64,". $imgData . "' />";
+		return $strMessage;		
+	}
 ?>
