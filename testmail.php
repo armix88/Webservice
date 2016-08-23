@@ -13,10 +13,10 @@
 		{
 			$row = $result->fetch_array(MYSQLI_ASSOC);
 		//	$filename = saveTempFile($row['photo'],"photo.jpg");
-		//	$filename = '/var/www/html/webservice/temp/photo.jpg';
-		//	file_put_contents($filename, $row['photo']);
+			$filename = '/var/www/html/webservice/temp/photo.jpg';
+			file_put_contents($filename, $row['photo']);
 			$photo = 
-			$url = "http://www.bembe.tk/webservice/api.php?key=".KEY."&tag=savedatas&useranme=bembe83@libero.it&photo=".$row['photo'];
+			$url = "http://www.bembe.tk/webservice/api.php?key=".KEY."&tag=savedatas&useranme=bembe83@libero.it&photo=".base64_encode($row['photo']);
 		}
 		else 
 			$filename = '';
@@ -30,7 +30,7 @@
 // 		echo(sendEmail($parameters));
 // 		unlink($filename);
 		
-		header("Location:" . $url . "target=\"new\"");
+		header("Location:" . $url);
 		
 	}catch (Exception $e)
 	{

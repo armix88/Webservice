@@ -100,10 +100,12 @@
 					break;
 				case "auth":
 					if(isset($username) AND issset($verif_key))
-					if(verifyUser($username,$verif_key))
 					{
-						authorizeUser($username);
-						$message = SUCCESS;
+						if(verifyUser($username,$verif_key))
+						{
+							authorizeUser($username);
+							$message = SUCCESS;
+						}
 					}
 					else
 						throw new Exception('Wrong key provided or username never registered');
@@ -121,9 +123,7 @@
 					$message = SUCCESS;
 					break;
 				case "savedatas":
-					$photo_name = "";
-					$description = ""
-					$message = saveDatas($username, $photo, $datas , $photo_name, $description);
+					$message = saveDatas($username, $photo_name, $description);
 					break:
 				default:
 					throw new Exception('No valid tag value');

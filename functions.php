@@ -224,9 +224,20 @@
 		unlink($filename);
 	}
 	
-	function saveDatas($username, $photo, $datas , $photo_name, $description)
+	function saveDatas($username, $photo_name, $description)
 	{
+		if($_FILE['photo']['error'] > 0)
+			throw new Exception($_FILE['photo']['error']);
+		else
+			 $photo = file_get_contents($_FILES['photo']['tmp_name']);
+		
+// 		if ($_FILE['datas']['error'] > 0)
+// 			throw new Exception($_FILE['datas']['error']);
+// 		else		
+// 			$datas = file_get_contents($_FILES['datas']['tmp_name']);
+		
 		$imgData = base64_encode($photo);
+		unlink($_FILES['photo']['tmp_name']);
 		$strMessage = "<img src= 'data:image/jpeg;base64,". $imgData . "' />";
 		return $strMessage;		
 	}
